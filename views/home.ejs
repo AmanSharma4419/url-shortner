@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        font-size: 1rem;
+        font-family: sans-serif;
+      }
+      h1 {
+        font-weight: 400;
+      }
+      div {
+        margin-top: 5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+      }
+      input {
+        width: 30rem;
+        height: 2rem;
+      }
+      input::placeholder {
+        color: rgb(71, 70, 70);
+        font-size: small;
+      }
+      input:focus {
+        outline: none;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        border: 2px;
+      }
+      table,
+      th,
+      td {
+        margin-top: 5rem;
+        border: 1px solid black;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Url shortner</title>
+  </head>
+  <body>
+    <div>
+      <h1>Url shortner</h1>
+      <form method="post" action="/url">
+        <input type="text" name="url" placeholder="https://example" />
+        <button type="submit">Generate</button>
+      </form>
+    </div>
+    <% if (locals.allUrls) { %>
+    <table style="width: 100%">
+      <tr>
+        <th>ShortId</th>
+        <th>Redirect</th>
+        <th>Clicks</th>
+      </tr>
+      <% allUrls.forEach(url => { %>
+      <tr>
+        <td><%= url.shortId %></td>
+        <td><%= url.redirectUrl %></td>
+        <td><%= url.visitHistory.length %></td>
+      </tr>
+      <% }) %>
+    </table>
+    <% } %>
+  </body>
+</html>

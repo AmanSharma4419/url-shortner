@@ -12,7 +12,8 @@ const handleGenerateShortUrl = async (req, res) => {
     visitHistory: [],
   };
   await URL.create(urlDataToBeInserted);
-  return res.status(200).json({ id: shortId, msg: "short url created" });
+  return res.redirect("/");
+  // return res.status(200).json({ id: shortId, msg: "short url created" });
 };
 
 const redirectionShortUrl = async (req, res) => {
@@ -41,4 +42,19 @@ const clickUrlInfo = async (req, res) => {
   }
 };
 
-module.exports = { handleGenerateShortUrl, redirectionShortUrl, clickUrlInfo };
+const viewRender = async (req, res) => {
+  const allUrls = await URL.find({});
+  if (allUrls) {
+    return res.status(200).render("home", {
+      allUrls: allUrls,
+    });
+  }
+  return res.status(404).json({ err: "no url found" });
+};
+
+module.exports = {
+  handleGenerateShortUrl,
+  redirectionShortUrl,
+  clickUrlInfo,
+  viewRender,
+};
