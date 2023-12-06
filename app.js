@@ -4,7 +4,7 @@ const staticRoutes = require("./routes/static.url");
 const { connectToDB } = require("./connectionDb");
 const app = express();
 const path = require("path");
-const PORT = 7000;
+const PORT = process.env.PORT || 7000;
 
 // Adding the dotenv file configuration
 require("dotenv").config();
